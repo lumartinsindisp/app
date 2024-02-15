@@ -1,0 +1,97 @@
+<mvc:View
+	controllerName="ui5.walkthrough.controller.InvoiceList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+>
+	<Table
+	growing="true"
+	growingScrollToLoad="true"
+		id="invoiceList"
+		class="sapUiResponsiveMargin"
+		width="auto"
+		items="{
+				path : 'invoice>/Invoices',
+				sorter: {
+					path: ''
+				}
+			}"
+	>
+		<headerToolbar>
+			<Toolbar>
+				<Title text="{i18n>invoiceListTitle}" />
+				<ToolbarSpacer />
+				<SearchField
+					width="50%"
+					search=".onFilterInvoices"
+				/>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column
+				hAlign="End"
+				minScreenWidth="Small"
+				demandPopin="true"
+				width="10em"
+			>
+				<Text text="{i18n>columnId}" />
+			</Column>
+			<Column
+			    hAlign="Center"
+				minScreenWidth="Small"
+				demandPopin="true"
+				width="40em"
+			>
+				<Text text="{i18n>columnTitle}" />
+			</Column>
+			<Column
+			    hAlign="Center"
+				minScreenWidth="Small"
+				demandPopin="true"
+				width="10em"
+			>
+				<Text text="{i18n>columnCompleted}" 
+				/>
+			</Column>
+			<Column
+			hAlign="Center"
+				minScreenWidth="Small"
+				demandPopin="true"
+				width="40em"
+			>
+			</Column>
+			<Column hAlign="End">
+
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem
+				type="Navigation"
+				press=".onPress"
+			>
+				<cells>
+					<ObjectNumber
+						number="{invoice>id}"
+						emphasized="false"
+					/>
+					<ObjectHeader
+					    title="{invoice>title}" 
+					
+					/>
+					<ObjectHeader
+						icon="{
+								parts: [
+									'invoice>completed',
+									'i18n>invoiceStatusA',
+									'i18n>invoiceStatusB'
+								],
+								formatter: '.formatter.statusText'
+							}"
+					/>
+					<Text
+                        text="clique para detalhes"
+					/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</mvc:View>
